@@ -4,6 +4,14 @@ package com.wddyxd;
 import com.wddyxd.cli.ArgsParser;
 import com.wddyxd.config.Config;
 import com.wddyxd.error.AppException;
+import com.wddyxd.generator.QuestionGenerator;
+import com.wddyxd.grade.GradeResult;
+import com.wddyxd.grade.Grader;
+import com.wddyxd.io.FileStore;
+import com.wddyxd.model.Question;
+
+import java.io.IOException;
+import java.util.List;
 
 /**
  * &#064program: corenger
@@ -14,25 +22,55 @@ import com.wddyxd.error.AppException;
 
 public class Main {
     public static void main(String[] args) {
+
         try {
             Config config = ArgsParser.parse(args);
-            //测试代码
-            System.out.println("参数识别成功：");
-            System.out.println("mode = " + config.getMode());
-            System.out.println("n = " + config.getN());
-            System.out.println("r = " + config.getR());
-            System.out.println("exerciseFile = " + config.getExerciseFile());
-            System.out.println("answerFile = " + config.getAnswerFile());
 
             if (config.getMode() == Config.Mode.GENERATE) {
-                // TODO: 调用生成器 + FileStore
+                QuestionGenerator generator = new QuestionGenerator(config.getR());
+                List<Question> questions = generator.generate(config.getN());
+
+                FileStore.writeExercises("Exercises.txt", questions);
+                FileStore.writeAnswers("Answers.txt", questions);
+
+                System.out.println("生成完成：Exercises.txt、Answers.txt");
             } else {
-                // TODO: 调用 Grader + FileStore
+                GradeResult result = new Grader()
+                        .gradeFiles(config.getExerciseFile(), config.getAnswerFile());
+
+                FileStore.writeGrade("Grade.txt", result);
+
+                System.out.println("批改完成：Grade.txt");
             }
         } catch (AppException e) {
             System.err.println("错误：" + e.getMessage());
             ArgsParser.printHelp();
             System.exit(1);
+        } catch (IOException e) {
+            System.err.println("文件读写错误：" + e.getMessage());
+            System.exit(1);
         }
     }
+
+//        try {
+//            Config config = ArgsParser.parse(args);
+//            //测试代码
+//            System.out.println("参数识别成功：");
+//            System.out.println("mode = " + config.getMode());
+//            System.out.println("n = " + config.getN());
+//            System.out.println("r = " + config.getR());
+//            System.out.println("exerciseFile = " + config.getExerciseFile());
+//            System.out.println("answerFile = " + config.getAnswerFile());
+//
+//            if (config.getMode() == Config.Mode.GENERATE) {
+//                // TODO: 调用生成器 + FileStore
+//            } else {
+//                // TODO: 调用 Grader + FileStore
+//            }
+//        } catch (AppException e) {
+//            System.err.println("错误：" + e.getMessage());
+//            ArgsParser.printHelp();
+//            System.exit(1);
+//        }
 }
+
