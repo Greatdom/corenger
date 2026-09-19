@@ -58,13 +58,4 @@ public class Grader {
         return grade(exercises, answers);
     }
 
-//    /** 对题目和用户答案判分。 */
-//    public GradeResult grade(List<Expr> exercises, List<Fraction> userAnswers) {
-//        return null; // TODO
-//    }
-//
-//    /** 从文件读题和答案，然后判分。 */
-//    public GradeResult gradeFiles(String exerciseFile, String answerFile) throws IOException {
-//        return null; // TODO
-//    }
 }

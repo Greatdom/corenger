@@ -54,17 +54,4 @@ public class GradeResult {
         return sb.toString();
     }
 
-//    private final List<Integer> correct;
-//    private final List<Integer> wrong;
-//
-//    public GradeResult(List<Integer> correct, List<Integer> wrong) {
-//        this.correct = correct;
-//        this.wrong = wrong;
-//    }
-//
-//    public List<Integer> getCorrect() { return correct; }
-//    public List<Integer> getWrong() { return wrong; }
-//
-//    /** 转成 Grade.txt 的文本。 */
-//    public String toText() { return ""; } // TODO
 }

@@ -103,18 +103,4 @@ public class FileStore {
         );
     }
 
-//    /** 写 Exercises.txt，每行 "表达式 = "。 */
-//    public static void writeExercises(String path, List<Question> questions) throws IOException { }
-//
-//    /** 写 Answers.txt，每行一个答案。 */
-//    public static void writeAnswers(String path, List<Question> questions) throws IOException { }
-//
-//    /** 读题目文件，返回 Expr 列表。 */
-//    public static List<Expr> readExercises(String path) throws IOException { return null; }
-//
-//    /** 读答案文件，返回 Fraction 列表。 */
-//    public static List<Fraction> readAnswers(String path) throws IOException { return null; }
-//
-//    /** 写 Grade.txt。 */
-//    public static void writeGrade(String path, GradeResult result) throws IOException { }
 }
